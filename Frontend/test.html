@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Disaster Alerts</title>
+</head>
+<body>
+    <h1>Real-time Disaster Alerts</h1>
+    <div id="alerts"></div>
+
+    <script>
+        async function fetchDisasterAlerts() {
+            try {
+                // Fetch data from the NASA EONET API
+                const apiKey = 'JCpwy6750XOLJaItkUYleMEfP66s974qDJgaartc'; // Replace with your actual API key
+                const response = await fetch(`https://eonet.sci.gsfc.nasa.gov/api/v3/events?apikey=${apiKey}`);
+                const data = await response.json();
+                
+                // Process the fetched data and display alerts
+                if (data.events) {
+                    const alertsContainer = document.getElementById('alerts');
+                    data.events.forEach(event => {
+                        const alertDiv = document.createElement('div');
+                        alertDiv.innerHTML = `
+                            <h2>${event.title}</h2>
+                            <p><strong>Category:</strong> ${event.categories[0].title}</p>
+                            <p><strong>Date:</strong> ${new Date(event.geometries[0].date).toLocaleString()}</p>
+                            <p><strong>Source:</strong> ${event.sources[0].url}</p>
+                            <hr>
+                        `;
+                        alertsContainer.appendChild(alertDiv);
+                    });
+                } else {
+                    console.error('No events found');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Fetch and display disaster alerts when the page loads
+        window.addEventListener('load', fetchDisasterAlerts);
+    </script>
+</body>
+</html>
