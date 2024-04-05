@@ -89,24 +89,4 @@ body {
     background-color: #007bff;
   }
  
-  /* Add this CSS to your existing CSS file or create a new one */
-
-.login-container {
-  position: relative;
-}
-
-.cancel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.cancel i {
-  font-size: 20px;
-  color: #999;
-}
-
-.cancel i:hover {
-  color: #ff0000;
-}
+  
