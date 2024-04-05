@@ -23,6 +23,9 @@ nav {
 nav ul li{
     list-style: none;
 }
+.nav_bar a:hover {
+    border-bottom: 4px solid #ffffff;
+}
 .logo {
     width: 25vw;
     display: flex;
